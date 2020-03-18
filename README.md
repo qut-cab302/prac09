@@ -10,7 +10,7 @@ CAB302 Software Development
 
 A [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)) is a rectangular array of values arranged in rows and columns.
 
-You are to implement a new collection, a `Matrix`. Ordinarily, new collections would implement the Collection interface, but for the purpose of this exercise, we will not do this so as to avoid implementing the eleven additional methods as part of the interface. However, because all collections can be instantiated with any type, your `Matrix` class will need to be generic. Therefore, the tests for this exercise will attempt to instantiate and test your `Matrix` class using both `Integer` and `String` cell values.
+You are to implement a new collection, a `Matrix`. Because all collections can be instantiated with any type, your `Matrix` class will need to be generic.
 
 The provided skeleton will help you get started. The first step is to fix the current compiler errors by inserting the correct return types and parameters for each method (and constructor) according to the JavaDoc comments. The next step is figuring out how you will internally model the Matrix. Look into Collection types that currently exist and think about how you can use them and their methods as a backbone for the class.
 
