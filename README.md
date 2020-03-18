@@ -5,18 +5,15 @@ CAB302 Software Development
 
 
 
-
 ## Exercise 1: Matrix
 
 A [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)) is a rectangular array of values arranged in rows and columns.
 
-You are to implement a new collection, a `Matrix`. Because all collections can be instantiated with any type, your `Matrix` class will need to be generic.
+You are to implement a new collection, a `Matrix`. This matrix is only required to store `int` values, but in the next exercise we will make our `Matrix` class generic.
 
 The provided skeleton will help you get started. The first step is to fix the current compiler errors by inserting the correct return types and parameters for each method (and constructor) according to the JavaDoc comments. The next step is figuring out how you will internally model the Matrix. Look into Collection types that currently exist and think about how you can use them and their methods as a backbone for the class.
 
-Remember, your class will need to make correct use of a generic type, but it is suggested that you initially experiment with a non-generic type (e.g. by just using integers or strings for the cell values), until you achieve a working matrix. After which, replace your hard-coded cell value type with a generic type.
-
-`toString()` should take the following form for `Integer` objects: 
+`toString()` should look like this for example:
 
 ```
 8	14	16	10	20
@@ -28,7 +25,47 @@ Remember, your class will need to make correct use of a generic type, but it is 
 2	16	16	12	15
 ```
 
-And the following form for `String` objects:
+The above uses tabs to separate the cell values. You can achieve the same result by inserting a `\t` character at the end of each cell value (except for the last cell of each row) when constructing the string.
+
+Note that the implementation of the iterator must be in column-major order.
+
+You can test your class by creating a main:
+
+```java
+public static void main(String[] args) {
+    Matrix m = new Matrix(2, 2);
+	
+    m.insert(0, 0, 0);
+    m.insert(0, 1, 1);
+    m.insert(1, 0, 2;
+    m.insert(1, 1, 3);
+	
+    System.out.println(m + "\n");
+	
+    for (String element : m) {
+        System.out.println(element);
+    }
+}
+```
+
+In this case, the output should be:
+
+```
+0	1
+2	3
+	
+0
+1
+2
+3
+```
+
+
+## Exercise 1: Matrix (generic)
+
+Because all collections can be instantiated with any type, modify your `Matrix` class to be generic.
+
+`toString()` should look like this if you have a `Matrix<String>` for example. 
 
 ```
 J	VK	k	J	j	bX	fv
@@ -37,11 +74,7 @@ jA	Za	D	dg	rt	jh	AX
 o	ql	P	pj	A	nd	hd
 ```
 
-Note that the dimension size will be randomized in testing (the above two examples are randomized). The tests and the above two examples use tabs to separate the cell values. You can achieve the same result by inserting a `\t` character at the end of each cell value (except for the last cell of each row) when constructing the string.
-
-Note that the implementation of the iterator must be in column-major order as per the API. See below for an example of this.
-
-You can test your class by creating a main:
+And for the iterator:
 
 ```java
 public static void main(String[] args) {
@@ -71,7 +104,6 @@ c
 b
 d
 ```
-
 
 ## Exercise 2: MapSet
 
