@@ -37,7 +37,7 @@ public static void main(String[] args) {
 	
     m.insert(0, 0, 0);
     m.insert(0, 1, 1);
-    m.insert(1, 0, 2;
+    m.insert(1, 0, 2);
     m.insert(1, 1, 3);
 	
     System.out.println(m + "\n");
