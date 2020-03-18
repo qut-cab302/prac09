@@ -61,7 +61,7 @@ In this case, the output should be:
 ```
 
 
-## Exercise 1: Matrix (generic)
+## Exercise 2: Matrix (generic)
 
 Because all collections can be instantiated with any type, modify your `Matrix` class to be generic.
 
@@ -105,7 +105,7 @@ b
 d
 ```
 
-## Exercise 2: MapSet
+## Exercise 3: MapSet
 
 Implement a new class `MapSet<K, V>` that extends `AbstractMap<K, HashSet<V>>` and implements `Iterable<V>` where `K` represents a generic key, and `V` represents a generic value:
 
