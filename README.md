@@ -7,7 +7,7 @@ CAB302 Software Development
 
 ## Exercise 1: Matrix
 
-A [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics) is a rectangular array of values arranged in rows and columns.
+A [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)) is a rectangular array of values arranged in rows and columns.
 
 You are to implement a new collection, a `Matrix`. This matrix is only required to store `int` values, but in the next exercise we will make our `Matrix` class generic.
 
