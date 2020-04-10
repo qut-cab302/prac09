@@ -42,7 +42,7 @@ public static void main(String[] args) {
 	
     System.out.println(m + "\n");
 	
-    for (String element : m) {
+    for (Integer element : m) {
         System.out.println(element);
     }
 }
