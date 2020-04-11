@@ -5,7 +5,7 @@ import java.util.*;
 public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable<V> {
 
     public static void main(String[] args) {
-        mapset.MapSet<String, Integer> map = new mapset.MapSet<>();
+        MapSet<String, Integer> map = new MapSet<>();
 
         map.addValue("B", 4);
         map.addValue("B", 4);
@@ -24,17 +24,15 @@ public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable
     }
 
     // internal data structure
-    HashMap<K, HashSet<V>> mapset = new HashMap<>();
+    HashMap<K, HashSet<V>> internal = new HashMap<>();
 
     private void addValue(K key, V value) {
-        HashSet<V> hashset = mapset.computeIfAbsent(key, k -> new HashSet<>());
+        HashSet<V> hashset = internal.computeIfAbsent(key, k -> new HashSet<>());
         hashset.add(value);
     }
 
-
     class InternalIterator implements Iterator<V>
     {
-
         Iterator<Iterator<V>> hashsetIterators;
         Iterator<V> iterator;
 
@@ -63,23 +61,21 @@ public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable
 
         @Override
         public V next() {
-
             boolean exhausted = !iterator.hasNext();
             if (exhausted) {
                 iterator = hashsetIterators.next();
             }
-
             return iterator.next();
         }
     }
 
     @Override
     public Iterator<V> iterator() {
-        return new mapset.MapSet.InternalIterator();
+        return new InternalIterator();
     }
 
     @Override
     public Set<Entry<K, HashSet<V>>> entrySet() {
-        return mapset.entrySet();
+        return internal.entrySet();
     }
 }
