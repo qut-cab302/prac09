@@ -31,8 +31,7 @@ public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable
         hashset.add(value);
     }
 
-    class InternalIterator implements Iterator<V>
-    {
+    class InternalIterator implements Iterator<V> {
         Iterator<Iterator<V>> hashsetIterators;
         Iterator<V> iterator;
 
