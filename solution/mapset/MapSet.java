@@ -4,66 +4,82 @@ import java.util.*;
 
 public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable<V> {
 
-    public HashMap<K, HashSet<V>> internal = new HashMap<K, HashSet<V>>();
-
     public static void main(String[] args) {
-        MapSet<String, Integer> map = new MapSet<>();
+        mapset.MapSet<String, Integer> map = new mapset.MapSet<>();
+
         map.addValue("B", 4);
-        map.addValue("A", 0);
-        map.addValue("A", 1);
+        map.addValue("B", 4);
+
         map.addValue("B", 3);
         map.addValue("A", 2);
+
+        map.addValue("@", 10);
+
+        map.addValue("A", 0);
+        map.addValue("A", 1);
+
         for (Integer value : map) {
             System.out.println(value);
         }
     }
 
-    public class MapListIterator<V> implements Iterator<V>
-    {
-        int key = 0;
-        int value = 0;
-        ArrayList<HashSet<V>> keys;
-        HashSet<V> currentValues;
-        Iterator<V> currentValuesIterator;
+    // internal data structure
+    HashMap<K, HashSet<V>> mapset = new HashMap<>();
 
-        public MapListIterator()
-        {
-            ArrayList a = new ArrayList(internal.values());
-            Collections.sort(a, (HashSet<V> z, HashSet<V> x) -> x.size() - z.size());
-            keys = a;
-            currentValues = keys.get(key);
-            currentValuesIterator = currentValues.iterator();
+    private void addValue(K key, V value) {
+        HashSet<V> hashset = mapset.computeIfAbsent(key, k -> new HashSet<>());
+        hashset.add(value);
+    }
+
+
+    class InternalIterator implements Iterator<V>
+    {
+
+        Iterator<Iterator<V>> hashsetIterators;
+        Iterator<V> iterator;
+
+        public InternalIterator() {
+            ArrayList<HashSet<V>> hashsets = new ArrayList<>();
+
+            for (Map.Entry<K, HashSet<V>> entry : entrySet()) {
+                hashsets.add(entry.getValue());
+
+            }
+            hashsets.sort( (HashSet<V> o1, HashSet<V> o2 ) -> o2.size() - o1.size() );
+            ArrayList<Iterator<V>> hashsetIterators = new ArrayList<>();
+
+            for (HashSet<V> hashset : hashsets) {
+                hashsetIterators.add(hashset.iterator());
+            }
+
+            this.hashsetIterators = hashsetIterators.iterator();
+            this.iterator = this.hashsetIterators.next();
         }
 
         @Override
         public boolean hasNext() {
-            return key < keys.size() - 1  || currentValuesIterator.hasNext();
+            return hashsetIterators.hasNext() || iterator.hasNext();
         }
 
         @Override
         public V next() {
-            if(!currentValuesIterator.hasNext())
-            {
-                HashSet<V> newValuesSet = keys.get(++key);
-                currentValuesIterator = newValuesSet.iterator();
+
+            boolean exhausted = !iterator.hasNext();
+            if (exhausted) {
+                iterator = hashsetIterators.next();
             }
-            return currentValuesIterator.next();
+
+            return iterator.next();
         }
     }
 
+    @Override
     public Iterator<V> iterator() {
-        return new MapListIterator<V>();
-    }
-
-    public void addValue(K key, V value) {
-        if (!containsKey(key)) {
-            internal.put(key, new HashSet<V>());
-        }
-        get(key).add(value);
+        return new mapset.MapSet.InternalIterator();
     }
 
     @Override
     public Set<Entry<K, HashSet<V>>> entrySet() {
-        return internal.entrySet();
+        return mapset.entrySet();
     }
 }
