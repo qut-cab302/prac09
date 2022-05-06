@@ -26,7 +26,7 @@ public class MapSet<K, V> extends AbstractMap<K, HashSet<V>> implements Iterable
     // internal data structure
     HashMap<K, HashSet<V>> internal = new HashMap<>();
 
-    private void addValue(K key, V value) {
+    public void addValue(K key, V value) {
         HashSet<V> hashset = internal.computeIfAbsent(key, k -> new HashSet<>());
         hashset.add(value);
     }

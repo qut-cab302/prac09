@@ -105,6 +105,8 @@ b
 d
 ```
 
+Cancel the exclusion on the `matrix` package in the `test` directory, then run the tests to check your Matrix class.
+
 ## Exercise 3: MapSet
 
 Implement a new class `MapSet<K, V>` that extends `AbstractMap<K, HashSet<V>>` and implements `Iterable<V>` where `K` represents a generic key, and `V` represents a generic value:
@@ -164,3 +166,5 @@ The expected output is:
 ```
 
 Values in key `"A"`  are traversed first because it has the largest quantity of elements associated with it. Values within `"A"` are then traversed in the order of the iterator of its associated `HashSet`. Next, the traversal is repeated for `"B"`.
+
+Cancel the exclusion on the `mapset` package in the `test` directory, then run the tests to check your MapSet class.
